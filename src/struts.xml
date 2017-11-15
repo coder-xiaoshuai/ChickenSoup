@@ -13,5 +13,9 @@
 		<action name="register" class="com.chickensoup.action.RegisterAction"
 			method="register" >
 		</action>
+		
+		<action name="login" class="com.chickensoup.action.LoginAction"
+			method="login" >
+		</action>
 	</package>
 </struts>  	

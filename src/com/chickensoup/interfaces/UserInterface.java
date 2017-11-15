@@ -10,4 +10,5 @@ public interface UserInterface {
 	User getUserByAccount(String account);
 	void deleteUserByAccount(String account);
 	void insertUser(User user);
+	void updateUser(User user);
 }

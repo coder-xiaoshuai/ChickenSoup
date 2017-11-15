@@ -13,5 +13,9 @@
 	<insert id="registerUser" useGeneratedKeys="true" keyProperty="userId" parameterType="com.chickensoup.bean.User">
 	    insert into User (account,password,userToken,createTime) values(#{account},#{password},#{userToken},#{createTime})
 	</insert>
-	
+	<!-- 主要是修改token 别的字段没有修改 -->
+	<update id="updateUser" parameterType="com.chickensoup.bean.User">
+	    update User set userToken=#{userToken}
+	    where userId=#{userId}
+	</update>
 </mapper>

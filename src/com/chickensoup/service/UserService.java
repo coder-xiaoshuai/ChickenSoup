@@ -13,4 +13,7 @@ public class UserService {
 		System.out.println("-----≤Â»Î∫Ûuserid-------"+user.getUserId());
 		return user.getUserId();
 	}
+	public void updateUser(User user){
+		new UserDao().updateUser(user);
+	}
 }

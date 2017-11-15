@@ -33,4 +33,11 @@ public class UserDao implements UserInterface{
 	public void insertUser(User user) {
 		MyBatisUtils.getSession().insert("com.chickensoup.mapping.userMapper.registerUser",user);
 	}
+
+
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		MyBatisUtils.getSession().update("com.chickensoup.mapping.userMapper.updateUser",user);
+	}
 }
