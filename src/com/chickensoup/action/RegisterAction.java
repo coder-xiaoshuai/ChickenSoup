@@ -69,7 +69,7 @@ public class RegisterAction extends ActionSupport {
 		// 第一步判断请求方式
 		HttpServletRequest request = ServletActionContext.getRequest();
 		ResultBean rb = new ResultBean<>();
-		rb.setCode(200);
+		rb.setCode(400);
 		// 先放空数据
 		rb.setData("{}");
 		if ("GET".equals(request.getMethod())) {
@@ -97,6 +97,7 @@ public class RegisterAction extends ActionSupport {
 		// 第三部查看是否已经注册了
 		UserService userService = new UserService();
 		if (userService.getUserByAccount(account) != null) {
+			System.out.println("----手机号-----"+userService.getUserByAccount(account).getAccount());
 			rb.setMsg("该手机号已经注册");
 			ActionUtils.returnData(rb);
 			return;
@@ -107,7 +108,9 @@ public class RegisterAction extends ActionSupport {
 			User user = new User();
 			user.setAccount(account);
 			user.setPassword(password);
-			user.setCreateTime(new Timestamp(System.currentTimeMillis()));
+			Timestamp currentTime=new Timestamp(System.currentTimeMillis());
+			user.setCreateTime(currentTime);
+			user.setUpdateTime(currentTime);
 			String userToken=UUID.randomUUID().toString();
 			user.setUserToken(userToken);
 			int userId = userService.insertUser(user);
@@ -115,11 +118,18 @@ public class RegisterAction extends ActionSupport {
 			UserInfoService userInfoService = new UserInfoService();
 			UserInfo userInfo = new UserInfo();
 			userInfo.setUserId(userId);
-			userInfo.setGender(0);
 			userInfo.setUserName("初始化用户"+userId);
-			userInfo.setSignature("这个人很懒，什么都没有留下");
+			userInfo.setGender(0);
+			userInfo.setSignature("这个人很懒,什么都没有留下");
+			userInfo.setAddress("未填写居住地址");
 			userInfo.setHeadurl("http://img5.imgtn.bdimg.com/it/u=917366822,112370361&fm=27&gp=0.jpg");
+			userInfo.setPhone(account);
+			userInfo.setOccupation("未填写职业信息");
+			userInfo.setSchool("未填写学校信息");
+			userInfo.setUpdateTime(new Timestamp(System.currentTimeMillis()));
 			userInfoService.insertUserInfo(userInfo);
+			//正确返回时设置code为200
+			rb.setCode(200);
 			rb.setData(new UserInfoResult(userInfo,userToken));
 			rb.setMsg("注册成功!");
 			ActionUtils.returnData(rb);
@@ -155,7 +165,7 @@ public class RegisterAction extends ActionSupport {
 				return true;
 			}else{
 				//暂时用于测试
-				return true;
+				return false;
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

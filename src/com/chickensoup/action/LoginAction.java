@@ -1,5 +1,6 @@
 package com.chickensoup.action;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +43,7 @@ public class LoginAction extends ActionSupport {
 		// 第一步判断请求方式
 		HttpServletRequest request = ServletActionContext.getRequest();
 		ResultBean rb = new ResultBean<>();
-		rb.setCode(200);
+		rb.setCode(400);
 		// 先放空数据
 		rb.setData("{}");
 		if ("GET".equals(request.getMethod())) {
@@ -72,10 +73,14 @@ public class LoginAction extends ActionSupport {
 		}else{
 			if(user.getPassword().equals(password)){
 				//登录成功 先更新userToken 获取用户资料返回
+				System.out.println("----------------------account"+user.getAccount()+"password"+user.getPassword()+"userId"+user.getUserId()+"timestamp"+user.getCreateTime());
 				user.setUserToken(UUID.randomUUID().toString());
+				//记录登录时间
+				user.setUpdateTime(new Timestamp(System.currentTimeMillis()));
 				userService.updateUser(user);
 				UserInfo userInfo=new UserInfoService().getUserInfoById(user.getUserId());
 				UserInfoResult result=new UserInfoResult(userInfo,user.getUserToken());
+				rb.setCode(200);
 				rb.setMsg("登录成功");
 				rb.setData(result);
 				ActionUtils.returnData(rb);

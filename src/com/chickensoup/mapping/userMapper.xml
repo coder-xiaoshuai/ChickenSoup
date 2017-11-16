@@ -11,11 +11,17 @@
 	</select>
 	<!-- 插入数据后将userid返回 -->
 	<insert id="registerUser" useGeneratedKeys="true" keyProperty="userId" parameterType="com.chickensoup.bean.User">
-	    insert into User (account,password,userToken,createTime) values(#{account},#{password},#{userToken},#{createTime})
+	    insert into User (account,password,userToken,createTime,updateTime) values(#{account},#{password},#{userToken},#{createTime},#{updateTime})
 	</insert>
 	<!-- 主要是修改token 别的字段没有修改 -->
 	<update id="updateUser" parameterType="com.chickensoup.bean.User">
-	    update User set userToken=#{userToken}
+	    update User <set>
+	    <if test="account!=null">account=#{account},</if>
+	    <if test="password!=null">password=#{password},</if>
+	    <if test="userToken!=null">userToken=#{userToken},</if>
+	    <if test="createTime!=null">createTime=#{createTime},</if>
+	    <if test="updateTime!=null">updateTime=#{updateTime}</if>
+	    </set>
 	    where userId=#{userId}
 	</update>
 </mapper>

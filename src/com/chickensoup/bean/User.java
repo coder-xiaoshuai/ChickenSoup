@@ -8,6 +8,7 @@ public class User {
 	private String password;
 	private Timestamp createTime;
 	private String userToken;
+	private Timestamp updateTime;
 	public int getUserId() {
 		return userId;
 	}
@@ -37,6 +38,12 @@ public class User {
 	}
 	public void setUserToken(String userToken) {
 		this.userToken = userToken;
+	}
+	public Timestamp getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
 	}
 	
 	
