@@ -16,5 +16,6 @@
 	<mappers>
 	    <mapper resource="com/chickensoup/mapping/userMapper.xml"/>
 	    <mapper resource="com/chickensoup/mapping/userInfoMapper.xml"/>
+	    <mapper resource="com/chickensoup/mapping/chickenSoupMapper.xml"/>
 	</mappers>
 </configuration>

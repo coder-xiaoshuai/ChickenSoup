@@ -9,16 +9,10 @@
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.multipart.maxSize" value="52428800" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
-	<package name="default" namespace="/" extends="struts-default,json-default">
-		<action name="register" class="com.chickensoup.action.RegisterAction"
-			method="register" >
+	<package name="struts_app" namespace="/app" extends="struts-default,json-default">
+		<action name="publish" class="com.chickensoup.action.PublishChickenSoupAction"
+			method="publish" >
 		</action>
-		
-		<action name="login" class="com.chickensoup.action.LoginAction"
-			method="login" >
-		</action>
-		
 	</package>
-	<include file="appstruts.xml"></include>
 	
 </struts>  	

@@ -17,5 +17,8 @@
 		<action name="login" class="com.chickensoup.action.LoginAction"
 			method="login" >
 		</action>
+		
 	</package>
+	<include file="appstruts.xml"></include>
+	
 </struts>  	
