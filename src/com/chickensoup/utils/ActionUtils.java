@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
 
 public class ActionUtils {
 	private static Gson gson;
@@ -17,7 +19,7 @@ public class ActionUtils {
 	 */
 	public static void returnData(String jsonData){
 		HttpServletResponse response=ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("application/json;charset=utf-8");
 		try {
 			PrintWriter out=response.getWriter();
 			out.println(jsonData);

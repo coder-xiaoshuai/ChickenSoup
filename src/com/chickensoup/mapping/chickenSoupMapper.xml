@@ -7,15 +7,19 @@
 		resultType="me.gacl.domain.User"就表示将查询结果封装成一个User类的对象返回 User类就是users表所对应的实体类 -->
 	<!-- 获取全部鸡汤 -->
 	<select id="getAllChickenSoup" parameterType="com.chickensoup.bean.CommonParameter" resultType="com.chickensoup.bean.ChickenSoup">
-		select * from ChickenSoup where chickenSoupId>=#{startId} limit #{page}*#{pageCount},#{pageCount}
+	    select a.*,(case b.type WHEN 1 THEN "TRUE" ELSE "FALSE" END)isParise from ChickenSoup a LEFT JOIN Goods b on a.chickenSoupId=b.chickenSoupId and b.userId=(SELECT userId from User where userToken=#{userToken}) where a.chickenSoupId>=#{startId} limit #{startOffset},${pageCount};
 	</select>
 	<!-- 获取热门鸡汤 -->
 	<select id="getHotChickenSoup" parameterType="com.chickensoup.bean.CommonParameter" resultType="com.chickensoup.bean.ChickenSoup">
-	    select * from ChickenSoup where chickenSoupId>=#{startId} and praiseCount>=1 limit #{page}*#{pageCount},#{pageCount}
+	    select a.*,(case b.type WHEN 1 THEN "TRUE" ELSE "FALSE" END)isParise from ChickenSoup a LEFT JOIN Goods b on a.chickenSoupId=b.chickenSoupId and b.userId=(SELECT userId from User where userToken=#{userToken}) where a.chickenSoupId>=#{startId} and praiseCount>=1 limit #{startOffset},${pageCount};
 	</select>
 	<!-- 插入数据后将userid返回 -->
 	<insert id="insertChickSoup"  parameterType="com.chickensoup.bean.ChickenSoup">
 	    insert into ChickenSoup (content,createUserId,createUserName,praiseCount,dissCount,commentCount,createTime) values(#{content},#{createUserId},#{createUserName},#{praiseCount},#{dissCount},#{commentCount},#{createTime})
 	</insert>
+	
+	<!-- <resultMap type="com.chickensoup.bean.ChickenSoup" id="chickenSoupMap">
+	    <id property="isParise" column="isParise"/>
+	</resultMap> -->
 	
 </mapper>

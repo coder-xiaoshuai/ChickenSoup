@@ -16,12 +16,14 @@ public class ChickenSoupDao implements ChickenSoupInterface{
 
 	@Override
 	public List<ChickenSoup> getAllChickenSoup(CommonParameter commonParameter) {
-		return null;
+		List<ChickenSoup> list=MyBatisUtils.getSession().selectList("com.chickensoup.mapping.chickenSoupMapper.getAllChickenSoup",commonParameter);
+		return list;
 	}
 
 	@Override
 	public List<ChickenSoup> getHotChickenSoup(CommonParameter commonParameter) {
-		return null;
+		List<ChickenSoup> list=MyBatisUtils.getSession().selectList("com.chickensoup.mapping.chickenSoupMapper.getHotChickenSoup",commonParameter);
+		return list;
 	}
 
 }

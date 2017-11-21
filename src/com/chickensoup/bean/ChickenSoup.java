@@ -11,6 +11,7 @@ public class ChickenSoup {
 	private int dissCount;
 	private int commentCount;
 	private Timestamp createTime;
+	private boolean isParise;
 	public int getChickenSoupId() {
 		return chickenSoupId;
 	}
@@ -59,5 +60,11 @@ public class ChickenSoup {
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
-
+	public boolean isParise() {
+		return isParise;
+	}
+	public void setParise(boolean isParise) {
+		this.isParise = isParise;
+	}
+	
 }
