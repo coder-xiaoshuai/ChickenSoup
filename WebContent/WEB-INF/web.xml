@@ -5,6 +5,16 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   
     http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">  
   <display-name></display-name>   
+  
+    <!-- 自定义过滤器 -->
+  <filter>  
+    <filter-name>login</filter-name>  
+    <filter-class>com.chickensoup.filter.LoginFilter</filter-class>  
+  </filter>  
+  <filter-mapping>  
+    <filter-name>login</filter-name>  
+    <url-pattern>/app/*</url-pattern>  
+  </filter-mapping>  
     
   <!-- Struts2配置 -->  
   <filter>  
@@ -15,5 +25,5 @@
     <filter-name>struts2</filter-name>  
     <url-pattern>/*</url-pattern>  
   </filter-mapping>  
-    
+ 
 </web-app> 
