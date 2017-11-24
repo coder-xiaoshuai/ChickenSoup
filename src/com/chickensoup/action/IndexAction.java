@@ -1,5 +1,6 @@
 package com.chickensoup.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.chickensoup.base.ResultBean;
@@ -106,7 +107,7 @@ public class IndexAction extends ActionSupport{
 				rb.setData(listChickenSoup);
 			}
 		}else{
-			rb.setData("[]");
+			rb.setData(new ArrayList<ChickenSoup>());
 		}
 		
 		rb.setCode(200);

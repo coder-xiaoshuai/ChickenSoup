@@ -9,6 +9,10 @@
 	<select id="getUserByAccount" parameterType="string" resultType="com.chickensoup.bean.User">
 		select * from User where account=#{account}
 	</select>
+	<!-- 根据id查询得到一个user对象 -->
+	<select id="getUserById" parameterType="int" resultType="com.chickensoup.bean.User">
+		select * from User where userId=#{userId}
+	</select>
 	<!-- 插入数据后将userid返回 -->
 	<insert id="registerUser" useGeneratedKeys="true" keyProperty="userId" parameterType="com.chickensoup.bean.User">
 	    insert into User (account,password,userToken,createTime,updateTime) values(#{account},#{password},#{userToken},#{createTime},#{updateTime})

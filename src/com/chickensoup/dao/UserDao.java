@@ -15,7 +15,16 @@ public class UserDao implements UserInterface{
 		User user=MyBatisUtils.getSession().selectOne("com.chickensoup.mapping.userMapper.getUserByAccount",account);
 		return user;
 	}
-
+	/**
+	 * 根据id获取用户
+	 * @param userId
+	 * @return
+	 */
+	@Override
+	public User getUserById(int userId){
+		User user=MyBatisUtils.getSession().selectOne("com.chickensoup.mapping.userMapper.getUserById",userId);
+		return user;
+	}
 	
 	/**
 	 * 删除操作暂时没有

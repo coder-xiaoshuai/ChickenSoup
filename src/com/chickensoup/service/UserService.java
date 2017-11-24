@@ -7,6 +7,11 @@ public class UserService {
 	public User getUserByAccount(String account){
 		return new UserDao().getUserByAccount(account);
 	}
+	
+	public User getUserById(int id){
+		return new UserDao().getUserById(id);
+	}
+	
 	public int insertUser(User user){
 		System.out.println("-----≤Â»Î«∞userid-------"+user.getUserId());
 		new UserDao().insertUser(user);

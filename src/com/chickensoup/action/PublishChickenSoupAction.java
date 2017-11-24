@@ -8,7 +8,9 @@ import org.apache.struts2.ServletActionContext;
 
 import com.chickensoup.base.ResultBean;
 import com.chickensoup.bean.ChickenSoup;
+import com.chickensoup.bean.User;
 import com.chickensoup.service.ChickenSoupService;
+import com.chickensoup.service.UserService;
 import com.chickensoup.utils.ActionUtils;
 import com.chickensoup.utils.StringUtils;
 import com.opensymphony.xwork2.ActionSupport;
@@ -21,7 +23,16 @@ public class PublishChickenSoupAction extends ActionSupport{
 	private String content;
 	private int createUserId;
 	private String createUserName;
+	private String userToken;
 	
+	public String getUserToken() {
+		return userToken;
+	}
+
+	public void setUserToken(String userToken) {
+		this.userToken = userToken;
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -60,6 +71,19 @@ public class PublishChickenSoupAction extends ActionSupport{
 			return;
 		}
 		System.out.println("--------接收到的content----------"+content);
+		if(StringUtils.isEmpty(userToken)){
+			rb.setMsg("token不能为空");
+			ActionUtils.returnData(rb);
+			return;
+		}else{
+			User user=new UserService().getUserById(createUserId);
+			if(!userToken.equals(user.getUserToken())){
+				//token已经发生变化
+				rb.setMsg("token已经失效,发布失败");
+				ActionUtils.returnData(rb);
+				return;
+			}
+		}
 		if(!StringUtils.isEmpty(content)){
 			//插入到数据库
 			ChickenSoup chickenSoup=new ChickenSoup();
