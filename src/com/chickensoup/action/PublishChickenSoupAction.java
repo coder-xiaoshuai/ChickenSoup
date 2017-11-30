@@ -79,7 +79,7 @@ public class PublishChickenSoupAction extends ActionSupport{
 			User user=new UserService().getUserById(createUserId);
 			if(!userToken.equals(user.getUserToken())){
 				//token已经发生变化
-				rb.setMsg("token已经失效,发布失败");
+				rb.setMsg("token已经失效,请重新登录再进行发布");
 				ActionUtils.returnData(rb);
 				return;
 			}
