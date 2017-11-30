@@ -78,7 +78,7 @@ public class IndexAction extends ActionSupport{
 			commonParameter.setUserToken(userToken);
 		}
 		if(startId==0){
-			commonParameter.setStartId(0);
+			commonParameter.setStartId(Integer.MAX_VALUE);
 		}else{
 			commonParameter.setStartId(startId);
 		}
